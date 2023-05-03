@@ -1,0 +1,20 @@
+
+.main-wrapper  {
+    margin: 200px auto;
+    width: 50%;
+    display: flex;
+}
+
+.search-input {
+    width: 100%;
+    margin-right: 10px;
+}
+
+.search-input:hover {
+    border: 1px solid #d4de1d;
+}
+
+.search-button  {
+    width: 150px;
+
+}
