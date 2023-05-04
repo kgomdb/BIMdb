@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +27,7 @@ export class AppComponent {
   public detailsLoader:number=-1;
   public ready:boolean=false;
   public results:any=[];
+  public type:string='movie';
 
 
   constructor(private httpClient: HttpClient) {
@@ -53,8 +53,6 @@ export class AppComponent {
         /* send request based on input. */
         this.searchByTitle(input).subscribe((data:any) => {
           this.searching = false;
-          
-          /* console.log(data); */
 
           /* handle 'Movie not found' error, assign results if match is found. */
           if (data['Response'] == 'True') {
@@ -73,13 +71,10 @@ export class AppComponent {
       });
     }
 
-    /* function sends a request and returns results based on user input.  */
+    /* function sends a request and returns results based on user input. */
+    /**-- type is to be assigned via toggle checkbox, needs logic for 'year' filter. --**/
     public searchByTitle(input: string):any {
-      if (input === '') {
-        return of([]);
-      }
-      
-      return this.httpClient.get('http://www.omdbapi.com/?s=' + input + '&apikey=' + this.apiKey);
+      return this.httpClient.get('http://www.omdbapi.com/?s=' + input + '&apikey=' + this.apiKey + '&type=' + this.type);
     }
 
     /* function sends a request to return details for a specific item. item is checked beforehand for details to avoid sending request for the same item. loading is handled with a simple index */
@@ -95,9 +90,10 @@ export class AppComponent {
           this.detailsLoader = -1;
           movie['Details show'] = true;
           movie['Details'] = data;
+          console.log(movie['Details']);
           this.detailsLoading=false;
         }, ((error:any) => {
-          console.log(error);
+          console.log('err: '+error);
         }));
       }
      
