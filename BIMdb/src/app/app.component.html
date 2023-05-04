@@ -1,5 +1,33 @@
-<div class="main-wrapper" fxLayoutGap="10px">
-  <button>ALL</button> 
-  <input class="search-input" type="text">
-  <button class="search-button">Search</button>
+<div class="main-wrapper">
+  <div class="logo-mockup">BIMdb</div>
+  <div class="search-container">
+    <input id="searchInput" class="search-input" type="text" [formControl]="searchInput" placeholder="Search BIMdb...">
+    <button *ngIf="searchInput.value" class="reset" (click)="reset()">Reset</button>
+  </div>
+  
+</div>
+<div *ngIf="ready && !results.length" class="results-container">
+  NO Matches
+</div>
+<div *ngIf="ready && results.length" class="results-container">
+  <div class="result-card" *ngFor="let movie of results; let index=index;">
+      <img class="poster" src="{{movie['Poster']}}">
+      <div class="header-container">
+        <span class="header">Title</span>
+        <span class="subheader">{{movie['Title']}}</span>
+        <span class="header">Year</span>
+        <span class="subheader">{{movie['Year']}}</span>
+        <button *ngIf="!movie['Details show']" class="details-button" (click)="getDetails(movie, index)">Show Details</button>
+        <button *ngIf="movie['Details show']" class="details-button-alt" (click)="hideDetails(movie)">Hide Details</button>
+      </div>
+      <div id="{{index}}" [ngClass]="detailsLoader===index?'details-loader-visible':'details-loader-hidden'">anyad</div>
+      <div *ngIf="movie['Details'] && movie['Details show']" class="details-container">
+          <div class="header">Director</div>
+          <div class="subheader">{{movie['Details']['Director']}}</div>
+          <div class="header">Actors</div>
+          <div class="subheader">{{movie['Details']['Actors']}}</div>
+          <div class="header">Plot</div>
+          <div class="subheader">{{movie['Details']['Plot']}}</div>
+      </div>
+  </div>
 </div>
