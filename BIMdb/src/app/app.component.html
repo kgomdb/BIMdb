@@ -4,10 +4,6 @@
     <input id="searchInput" class="search-input" type="text" [formControl]="searchInput" placeholder="Search BIMdb...">
     <button *ngIf="searchInput.value" class="reset" (click)="reset()">Reset</button>
   </div>
-<!--   <label class="switch">
-    <input type="checkbox" [ngModel]="">
-    <span class="slider round"></span>
-  </label> -->
 </div>
 <div *ngIf="ready && !results.length" class="results-container">
   NO Matches

@@ -27,7 +27,7 @@ export class AppComponent {
   public detailsLoader:number=-1;
   public ready:boolean=false;
   public results:any=[];
-  public type:string='movie';
+  public type:string='Movie';
 
 
   constructor(private httpClient: HttpClient) {
@@ -58,7 +58,6 @@ export class AppComponent {
           if (data['Response'] == 'True') {
             this.results = data['Search'];
             this.ready = true;
-            console.log(this.results);
           } else {
             this.results=[];
           }

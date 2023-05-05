@@ -3,7 +3,7 @@
     display:flex;
     flex-direction: column;
     border-radius: 10px;
-    background:#ffffff;
+    background:#fff;
     position: relative;
     padding: 10px;
     min-height: 200px;
@@ -63,6 +63,14 @@
     border-color: #0c482f;
 }
 
+.filter-chip {
+    background: #fff;
+    border-radius: 28px;
+    box-shadow: 0 0 12px #2871537a;
+    border: 1px solid transparent;
+    width: 80px;
+}
+
 .reset {
     margin: auto;
     background: #d5e5e0;
@@ -98,12 +106,12 @@
     width:100%;
     justify-self: center;
     background: #fff;
-    border-bottom: 1px solid #ced4da;
+    //border-bottom: 1px solid #ced4da;
 }
 
 .poster {
     width: 220px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .header-container {
@@ -179,37 +187,62 @@
     width: 70%;
     padding: 10px;
     gap: 10px;
+    border-left: 1px solid #ced4da;
+    -webkit-animation: slideDown 0.8s forwards;
+    -moz-animation: slideDown 0.8s forwards;
+    animation: slideDown 0.8s forwards;
 }
   
-
+/*spin animation. */
 @keyframes spin {
     to { -webkit-transform: rotate(360deg); }
   }
-  @-webkit-keyframes spin {
+@-webkit-keyframes spin {
     to { -webkit-transform: rotate(360deg); }
 }
 
+/* slide animations. */
+
 @-webkit-keyframes slideIn {
-    0% {
-            transform: translateX(-1900px);
-    }
-    100% {
-            transform: translateX(0);
-    }
+    0% {transform: translateX(-1900px); }
+    100% {transform: translateX(0); }
 }
 @-moz-keyframes slideIn {
     0% {
-            transform: translateX(-1900px);
+        transform: translateX(-1900px);
     }
-    100% {
-            transform: translateX(0);
-    }
+    100% {transform: translateX(0);
+}
 }
 @keyframes slideIn {
     0% {
-            transform: translateX(-1900px);
+        transform: translateX(-1900px);
     }
     100% {
-            transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@-webkit-keyframes slideDown {
+    0% {
+        transform: translateY(-13px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@-moz-keyframes slideDown {
+    0% {
+        transform: translateY(-13px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideDown {
+    0% {
+        transform: translateY(-13px);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
