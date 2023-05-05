@@ -141,6 +141,11 @@ export class AppComponent {
       this.searchInput.setValue('');
       this.results = [];
       this.detailsLoader = -1;
+      this.searchBy = 'Movie';
+      var checkbox:any = document.getElementById('year');
+      checkbox['checked'] = false;
+      console.log(checkbox);
+      this.releaseYear = new Date().getFullYear();
       this.ready = false;
     }
 
