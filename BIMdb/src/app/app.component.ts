@@ -11,7 +11,7 @@ import { environment } from 'src/environment';
 })
 
 export class AppComponent {
-
+  public title='BIMdb';
   public apiKey=environment.apiKey;
 
   public searchInput=new FormControl('');
