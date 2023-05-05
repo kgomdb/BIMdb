@@ -59,6 +59,20 @@
     text-indent: 10px;
 }
 
+.year-selector:hover {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #b7cec7;
+    border-color: #0c482f;
+}
+
+.year-selector:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #b7cec7;
+    border-color: #0c482f;
+}
+
 .search-input {
     width: 100%;
     height: 35px;
