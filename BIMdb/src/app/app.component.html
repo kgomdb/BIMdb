@@ -1,16 +1,55 @@
+
+<!-- main wrapper. -->
 <div class="main-wrapper">
+  <!-- mockup logo. -->
   <div class="logo-mockup">BIMdb</div>
+  <!-- /mockup logo. -->
+
+  <!-- search container. -->
   <div class="search-container">
-    <input id="searchInput" class="search-input" type="text" [formControl]="searchInput" placeholder="Search BIMdb...">
-    <button *ngIf="searchInput.value" class="reset" (click)="reset()">Reset</button>
+      <input id="searchInput" class="search-input" type="text" [formControl]="searchInput" [(ngModel)]="inputValue" placeholder="Search by {{searchBy}}...">
+      <button *ngIf="searchInput.value" class="reset" (click)="reset()">Reset</button>
   </div>
+    <!-- /search container. -->
+    <div class="checkbox-container">
+      <input type="checkbox" id="year" name="year" (change)="searchBySet($event)">
+      <label for="year">Search by Year</label>
+      <input class="year-selector" [disabled]="searchBy!=='Year'" type="number" min="1900" max="2099" step="1" [(ngModel)]="releaseYear"/>
+    </div>
 </div>
-<div *ngIf="ready && !results.length" class="results-container">
+<!-- /main wrapper. -->
+
+<!-- no results container. -->
+<div *ngIf="ready && !results.length" class="no-results-container">
   NO Matches
 </div>
-<div *ngIf="!ready && !results.length && searching"class="details-loader-visible"></div>
-<div *ngIf="ready && results.length" class="results-container">
-  <div class="result-card" *ngFor="let movie of results; let index=index;">
+<!-- /no results container. -->
+
+<!-- spinner. -->
+<div *ngIf="!ready && !results.length && searching" class="details-loader-container">
+  <div  class="details-loader-visible"></div>
+</div>
+<!-- /spinner. -->
+
+
+<!-- pagination container. -->
+<div *ngIf="ready && results.length && !reloading"  class="pagination-container">
+  <button [ngClass]="page==1?'details-button-disabled':'details-button-alt'" (click)="previousPage();">Previous Page</button>
+  <span>Page {{page}} of {{page_max}}</span>
+  <button [ngClass]="page==page_max?'details-button-disabled':'details-button'" (click)="nextPage();">Next Page</button>
+</div>
+<!-- /pagination container. -->
+  <!-- reloading spinner. -->
+  <div *ngIf="reloading" class="details-loader-container">
+    <div  class="details-loader-visible"></div>
+  </div>
+  <!-- /reloading spinner. -->
+
+<!-- results container. -->
+<div *ngIf="ready && results.length && !reloading" class="results-container">
+  <!-- result cards and details. -->
+  <div style="margin-bottom:20px;">
+    <div class="result-card" *ngFor="let movie of results; let index=index;">
       <img class="poster" src="{{movie['Poster']}}">
       <div class="header-container">
         <span class="header">Title</span>
@@ -31,5 +70,8 @@
           <div class="header">Rating</div>
           <div class="subheader">{{movie['Details']['imdbRating']}}</div>
       </div>
+    </div>
   </div>
+  <!-- /result cards and details. -->
 </div>
+  <!-- /results container. -->
